@@ -17,6 +17,11 @@ html {
   --color-gray-900: hsl(0deg 0% 90%);
 }
 
+:root {
+  --cell-width: 20%;
+  --cell-font-size: 2rem;
+}
+
 /*
   Custom styles
 */
@@ -38,6 +43,10 @@ button {
   cursor: pointer;
   text-align: left;
   color: inherit;
+}
+
+select {
+  padding: 8px 16px;
 }
 
 .wrapper {
@@ -80,7 +89,7 @@ h1 {
   padding: var(--game-spacing) 32px;
   margin: 0 auto;
   min-width: 250px;
-  max-width: min(500px, 58vh, 100%);
+  max-width: min(500px, 70vh, 100%);
 }
 
 .guess-results {
@@ -98,13 +107,19 @@ h1 {
 
 .cell {
   position: relative;
-  width: 20%;
+  width: var(--cell-width);
   display: grid;
   place-content: center;
   aspect-ratio: 1 / 1;
   border: 2px solid var(--color-gray-700);
   border-radius: var(--radius);
-  font-size: 2rem;
+  font-size: var(--cell-font-size);
+}
+
+.cell-disabled {
+  background-color: transparent;
+  border: transparent;
+  border-bottom: 2px solid var(--color-gray-900);
 }
 
 /*
@@ -166,23 +181,53 @@ h1 {
   left: 0;
   right: 0;
   bottom: 0;
+  display: flex;
+  justify-content: start;
   width: 100%;
   max-width: 600px;
+  height: 200px;
   margin: 0 auto;
-  padding: 32px;
   text-align: center;
   animation: slideUp 750ms cubic-bezier(0, 0.72, 0.24, 1.02);
+  /* border: 1px solid var(--color-gray-500); */
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   border-radius: 4px 4px 0px 0px;
   will-change: transform;
+  background-size: cover;
+  overflow: clip;
+
+  & img {
+    height: 100%;
+    object-fit: cover;
+    width: 200px;
+  }
+}
+
+.banner-body {
+  height: 100%;
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+
+  & a {
+    text-decoration: none;
+    color: white;
+    background-color: var(--color-gray-300);
+    padding: 8px 16px;
+    border-radius: 8px;
+  }
 }
 
 .happy.banner {
-  background: var(--color-success);
-  color: white;
+  background: white;
+  border-top: 4px solid var(--color-success);
 }
 .sad.banner {
-  background: var(--color-error);
-  color: white;
+  background: white;
+  border-top: 4px solid var(--color-error);
 }
 
 .visually-hidden {
